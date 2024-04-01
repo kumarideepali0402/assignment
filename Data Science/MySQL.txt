@@ -1,0 +1,121 @@
+create database ds2;
+
+use ds2;
+
+show tables;
+
+-- a
+select * from olympics;  
+
+-- b
+select name ,medal from olympics; 
+
+-- c
+select count(id) from olympics; 
+
+-- d
+select * from olympics 
+where medal='Gold'; 
+
+-- e
+select * from olympics
+where medal='Silver'
+order by year;  
+
+-- g
+select team
+from olympics
+where medal='Gold' 
+group by team
+having count(medal)>50; 
+
+
+-- i
+select name,count(medal) 
+from olympics
+group by name
+order by count(medal) desc
+limit 1; 
+ 
+-- j
+select event
+from olympics
+where event like '%Freestyle%'; 
+
+-- k
+select name,sport
+from olympics
+group by sport,name
+order by count(medal) desc
+limit 3; 
+
+-- l
+select
+    name,year,
+    count(*) AS total_medals
+from
+    olympics
+group by
+    name, year
+having
+    COUNT(*) > 1; 
+
+-- m
+select * from olympics;
+
+select team 
+from olympics 
+where season='summer' and season='winter' and medal='Gold';
+
+-- n
+select team as country,
+max(year) - min(year) AS yeardifference
+from olympics
+group by team; 
+ 
+-- o
+select
+    team,
+    AVG(total_medals) AS avg_medals_per_athlete
+from (
+    select
+        team,
+        name,
+        COUNT(*) AS total_medals
+    from
+        olympics
+    group by
+        team, name
+) as athlete_medal_counts
+group by
+    team; 
+
+-- p
+select name,event
+from olympics
+where medal= 'Silver'
+and event in (
+        select event
+        from olympics
+        where medal = 'Gold'
+    )
+    and name IN (
+        select name
+        from olympics
+        where medal= 'Gold'
+    );  
+
+-- s   
+select * from olympics;    
+   
+select team as Country
+from olympics
+where sport is not null
+group by country
+having count(sport)>10;  
+   
+-- t
+select name, sport, min(year) AS startyear
+from Olympics
+group by name, sport
+having count(distinct year) >= 3; 

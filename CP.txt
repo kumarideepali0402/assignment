@@ -2,9 +2,10 @@ Q1.
 #include<iostream>
 #include <vector>
 #include <unordered_map>
+using namespace std;
 
  
-int min_value(const std::vector<int>& lst) {
+int min_value(const vector<int>& lst) {
     if (lst.empty()) return 0;  
     int min_val = lst[0];
     for (int num : lst) {
@@ -16,7 +17,7 @@ int min_value(const std::vector<int>& lst) {
 }
 
 
-int max_value(const std::vector<int>& lst) {
+int max_value(const vector<int>& lst) {
     if (lst.empty()) return 0; 
     int max_val = lst[0];
     for (int num : lst) {
@@ -28,7 +29,7 @@ int max_value(const std::vector<int>& lst) {
 }
 
 
-int sum_values(const std::vector<int>& lst) {
+int sum_values(const vector<int>& lst) {
     int sum = 0;
     for (int num : lst) {
         sum += num;
@@ -37,13 +38,13 @@ int sum_values(const std::vector<int>& lst) {
 }
 
 
-double average_value(const std::vector<int>& lst) {
+double average_value(const vector<int>& lst) {
     if (lst.empty()) return 0.0;
     double sum = sum_values(lst);
     return sum / lst.size();
 }
 
-int mode_value(const std::vector<int>& lst) {
+int mode_value(const vector<int>& lst) {
     if (lst.empty()) return 0; 
     std::unordered_map<int, int> counter;
     for (int num : lst) {
@@ -60,8 +61,8 @@ int mode_value(const std::vector<int>& lst) {
     return mode_val;
 }
 
-void process_stream(const std::vector<int>& stream) {
-    std::vector<int> lst;
+void process_stream(const vector<int>& stream) {
+    vector<int> lst;
     for (int num : stream) {
         lst.push_back(num);
         int min_val = min_value(lst);
@@ -69,7 +70,7 @@ void process_stream(const std::vector<int>& stream) {
         int sum = sum_values(lst);
         double avg = average_value(lst);
         int mode_val = mode_value(lst);
-        std::cout << "min, max, sum, average and mode after addition of " << num << " is ("
+        cout << "min, max, sum, average and mode after addition of " << num << " is ("
                   << min_val << ", " << max_val << ", "
                   << sum << ", " << avg << ", "
                   << mode_val << ")." << std::endl;
@@ -77,7 +78,7 @@ void process_stream(const std::vector<int>& stream) {
 }
 
 int main() {
-    std::vector<int> stream = {2, 4, 3, 2, -3};
+    vector<int> stream = {2, 4, 3, 2, -3};
     process_stream(stream);
     return 0;
 }
@@ -89,9 +90,10 @@ int main() {
 Q2.
 #include <iostream>
 #include <vector>
+using namespace std;
 
-std::vector<int> generate_primes(int N) {
-    std::vector<int> primes;
+vector<int> generate_primes(int N) {
+    vector<int> primes;
     int num = 2;
     while (primes.size() < N) {
         bool is_prime = true;
@@ -106,7 +108,7 @@ std::vector<int> generate_primes(int N) {
         }
         num++;
     }
-    std::vector<int> result;
+    vector<int> result;
     for (size_t i = 0; i < primes.size(); i += 2) {
         result.push_back(primes[i]);
     }
@@ -115,11 +117,11 @@ std::vector<int> generate_primes(int N) {
 
 int main() {
     int N;
-    std::cout << "Enter the number of primes: ";
-    std::cin >> N;
-    std::vector<int> result = generate_primes(N);
+    cout << "Enter the number of primes: ";
+    cin >> N;
+    vector<int> result = generate_primes(N);
     for (int prime : result) {
-        std::cout << prime << " ";
+        cout << prime << " ";
     }
     return 0;
 }
@@ -127,9 +129,10 @@ int main() {
 Q3.
 #include <iostream>
 #include <vector>
+using namespace std;
 
-std::vector<int> merge_sorted_arrays(const std::vector<int>& arr1, const std::vector<int>& arr2) {
-    std::vector<int> merged_array;
+vector<int> merge_sorted_arrays(const vector<int>& arr1, const vector<int>& arr2) {
+    vector<int> merged_array;
     size_t i = 0, j = 0;
 
     while (i < arr1.size() && j < arr2.size()) {
@@ -159,22 +162,22 @@ std::vector<int> merge_sorted_arrays(const std::vector<int>& arr1, const std::ve
 
 int main() {
     int size1, size2;
-    std::cin >> size1;
-    std::vector<int> arr1(size1);
+    cin >> size1;
+    vector<int> arr1(size1);
     for (int i = 0; i < size1; ++i) {
-        std::cin >> arr1[i];
+        cin >> arr1[i];
     }
 
-    std::cin >> size2;
-    std::vector<int> arr2(size2);
+    cin >> size2;
+    vector<int> arr2(size2);
     for (int i = 0; i < size2; ++i) {
-        std::cin >> arr2[i];
+        cin >> arr2[i];
     }
 
     
-    std::vector<int> merged_array = merge_sorted_arrays(arr1, arr2);
+    vector<int> merged_array = merge_sorted_arrays(arr1, arr2);
     for (int num : merged_array) {
-        std::cout << num << " ";
+        cout << num << " ";
     }
 
     return 0;
@@ -182,6 +185,7 @@ int main() {
 
 Q4.
 #include <iostream>
+using namespace std;
 
 long long power_mod(long long a, long long b, long long m) {
     long long result = 1;
@@ -203,11 +207,11 @@ long long power_mod(long long a, long long b, long long m) {
 
 int main() {
     long long a, b, m;
-    std::cin >> a >> b >> m;
+    cin >> a >> b >> m;
 
     
     long long result = power_mod(a, b, m);
-    std::cout << result << std::endl;
+    cout << result << endl;
 
     return 0;
 }
@@ -215,8 +219,9 @@ int main() {
 Q5.
 #include <iostream>
 #include <vector>
+using namespace std;
 
-int lower_bound(const std::vector<int>& arr, int x) {
+int lower_bound(const vector<int>& arr, int x) {
     int left = 0, right = arr.size() - 1;
     int result = -1;
 
@@ -234,7 +239,7 @@ int lower_bound(const std::vector<int>& arr, int x) {
     return result;
 }
 
-int upper_bound(const std::vector<int>& arr, int x) {
+int upper_bound(const vector<int>& arr, int x) {
     int left = 0, right = arr.size() - 1;
     int result = -1;
 
@@ -252,7 +257,7 @@ int upper_bound(const std::vector<int>& arr, int x) {
     return result;
 }
 
-bool is_present(const std::vector<int>& arr, int x) {
+bool is_present(const vector<int>& arr, int x) {
     int left = 0, right = arr.size() - 1;
 
     while (left <= right) {
@@ -273,9 +278,9 @@ bool is_present(const std::vector<int>& arr, int x) {
 int main() {
     std::vector<int> arr = {1, 2, 3, 4, 5, 6, 7, 8, 9};
     int x = 5;
-    std::cout << "Lower bound of " << x << ": " << lower_bound(arr, x) << std::endl;
-    std::cout << "Upper bound of " << x << ": " << upper_bound(arr, x) << std::endl;
-    std::cout << "Is " << x << " present in the array? " << (is_present(arr, x) ? "Yes" : "No") << std::endl;
+    cout << "Lower bound of " << x << ": " << lower_bound(arr, x) << endl;
+    cout << "Upper bound of " << x << ": " << upper_bound(arr, x) << endl;
+    cout << "Is " << x << " present in the array? " << (is_present(arr, x) ? "Yes" : "No") << endl;
     return 0;
 }
 
