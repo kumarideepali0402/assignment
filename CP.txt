@@ -1,0 +1,281 @@
+Q1.
+#include<iostream>
+#include <vector>
+#include <unordered_map>
+
+ 
+int min_value(const std::vector<int>& lst) {
+    if (lst.empty()) return 0;  
+    int min_val = lst[0];
+    for (int num : lst) {
+        if (num < min_val) {
+            min_val = num;
+        }
+    }
+    return min_val;
+}
+
+
+int max_value(const std::vector<int>& lst) {
+    if (lst.empty()) return 0; 
+    int max_val = lst[0];
+    for (int num : lst) {
+        if (num > max_val) {
+            max_val = num;
+        }
+    }
+    return max_val;
+}
+
+
+int sum_values(const std::vector<int>& lst) {
+    int sum = 0;
+    for (int num : lst) {
+        sum += num;
+    }
+    return sum;
+}
+
+
+double average_value(const std::vector<int>& lst) {
+    if (lst.empty()) return 0.0;
+    double sum = sum_values(lst);
+    return sum / lst.size();
+}
+
+int mode_value(const std::vector<int>& lst) {
+    if (lst.empty()) return 0; 
+    std::unordered_map<int, int> counter;
+    for (int num : lst) {
+        counter[num]++;
+    }
+    int max_freq = 0;
+    int mode_val = 0;
+    for (const auto& pair : counter) {
+        if (pair.second > max_freq) {
+            max_freq = pair.second;
+            mode_val = pair.first;
+        }
+    }
+    return mode_val;
+}
+
+void process_stream(const std::vector<int>& stream) {
+    std::vector<int> lst;
+    for (int num : stream) {
+        lst.push_back(num);
+        int min_val = min_value(lst);
+        int max_val = max_value(lst);
+        int sum = sum_values(lst);
+        double avg = average_value(lst);
+        int mode_val = mode_value(lst);
+        std::cout << "min, max, sum, average and mode after addition of " << num << " is ("
+                  << min_val << ", " << max_val << ", "
+                  << sum << ", " << avg << ", "
+                  << mode_val << ")." << std::endl;
+    }
+}
+
+int main() {
+    std::vector<int> stream = {2, 4, 3, 2, -3};
+    process_stream(stream);
+    return 0;
+}
+
+
+
+
+
+Q2.
+#include <iostream>
+#include <vector>
+
+std::vector<int> generate_primes(int N) {
+    std::vector<int> primes;
+    int num = 2;
+    while (primes.size() < N) {
+        bool is_prime = true;
+        for (int p : primes) {
+            if (num % p == 0) {
+                is_prime = false;
+                break;
+            }
+        }
+        if (is_prime) {
+            primes.push_back(num);
+        }
+        num++;
+    }
+    std::vector<int> result;
+    for (size_t i = 0; i < primes.size(); i += 2) {
+        result.push_back(primes[i]);
+    }
+    return result;  
+}
+
+int main() {
+    int N;
+    std::cout << "Enter the number of primes: ";
+    std::cin >> N;
+    std::vector<int> result = generate_primes(N);
+    for (int prime : result) {
+        std::cout << prime << " ";
+    }
+    return 0;
+}
+
+Q3.
+#include <iostream>
+#include <vector>
+
+std::vector<int> merge_sorted_arrays(const std::vector<int>& arr1, const std::vector<int>& arr2) {
+    std::vector<int> merged_array;
+    size_t i = 0, j = 0;
+
+    while (i < arr1.size() && j < arr2.size()) {
+        if (arr1[i] <= arr2[j]) {
+            merged_array.push_back(arr1[i]);
+            i++;
+        } else {
+            merged_array.push_back(arr2[j]);
+            j++;
+        }
+    }
+
+    
+    while (i < arr1.size()) {
+        merged_array.push_back(arr1[i]);
+        i++;
+    }
+
+    
+    while (j < arr2.size()) {
+        merged_array.push_back(arr2[j]);
+        j++;
+    }
+
+    return merged_array;
+}
+
+int main() {
+    int size1, size2;
+    std::cin >> size1;
+    std::vector<int> arr1(size1);
+    for (int i = 0; i < size1; ++i) {
+        std::cin >> arr1[i];
+    }
+
+    std::cin >> size2;
+    std::vector<int> arr2(size2);
+    for (int i = 0; i < size2; ++i) {
+        std::cin >> arr2[i];
+    }
+
+    
+    std::vector<int> merged_array = merge_sorted_arrays(arr1, arr2);
+    for (int num : merged_array) {
+        std::cout << num << " ";
+    }
+
+    return 0;
+}
+
+Q4.
+#include <iostream>
+
+long long power_mod(long long a, long long b, long long m) {
+    long long result = 1;
+    a = a % m;   
+
+    while (b > 0) {
+        
+        if (b % 2 == 1) {
+            result = (result * a) % m;
+        }
+
+        
+        b = b / 2;
+        a = (a * a) % m;
+    }
+
+    return result;
+}
+
+int main() {
+    long long a, b, m;
+    std::cin >> a >> b >> m;
+
+    
+    long long result = power_mod(a, b, m);
+    std::cout << result << std::endl;
+
+    return 0;
+}
+
+Q5.
+#include <iostream>
+#include <vector>
+
+int lower_bound(const std::vector<int>& arr, int x) {
+    int left = 0, right = arr.size() - 1;
+    int result = -1;
+
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+
+        if (arr[mid] >= x) {
+            result = mid;
+            right = mid - 1;
+        } else {
+            left = mid + 1;
+        }
+    }
+
+    return result;
+}
+
+int upper_bound(const std::vector<int>& arr, int x) {
+    int left = 0, right = arr.size() - 1;
+    int result = -1;
+
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+
+        if (arr[mid] > x) {
+            result = mid;
+            right = mid - 1;
+        } else {
+            left = mid + 1;
+        }
+    }
+
+    return result;
+}
+
+bool is_present(const std::vector<int>& arr, int x) {
+    int left = 0, right = arr.size() - 1;
+
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+
+        if (arr[mid] == x) {
+            return true;
+        } else if (arr[mid] < x) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+
+    return false;
+}
+
+int main() {
+    std::vector<int> arr = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int x = 5;
+    std::cout << "Lower bound of " << x << ": " << lower_bound(arr, x) << std::endl;
+    std::cout << "Upper bound of " << x << ": " << upper_bound(arr, x) << std::endl;
+    std::cout << "Is " << x << " present in the array? " << (is_present(arr, x) ? "Yes" : "No") << std::endl;
+    return 0;
+}
+

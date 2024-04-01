@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Application Form</h1>
+    <form action="action_page.php" method="POST">
+        <div>
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" placeholder="name" required>
+        </div><br>
+
+        <div>
+          <label for="father_name">Father's Name:</label>
+          <input type="text" id="father_name" name="father_name" placeholder="fathername" required>
+        </div><br>
+
+        <div>
+          <label for="mother_name">Mother's Name:</label>
+          <input type="text" id="mother_name" name="mother_name" placeholder="mothername" required>
+        </div><br>
+
+        <div>
+            <label for="phone_number">Phone No.:</label>
+            <input type="phone" id="phone_number" name="phone_number" placeholder="e.g.63457821##" required>
+          </div><br>
+
+        <div>
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" placeholder="abc@gmail.com" required>
+          </div><br>
+
+        <div>
+            <label for="DOB">DOB:</label>
+            <input type="date" id="DOB" name="DOB" placeholder="6345782196" required>
+        </div><br>
+
+        <div>
+          <label for="blood_group">Blood Group:</label>
+          <select  id="blood_group" name="blood_group" required>
+                 <option value="A+/-">A+/-</option>
+                 <option value="B+/-">B+/-</option>
+                 <option value="O+/-">O+/-</option>
+                 <option value="AB+/-">AB+/-</option>
+           </select>
+      </div><br>
+
+        <div>
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" placeholder="address" required>
+        </div><br>
+       
+
+        <div>
+            <label for="Department">Department:</label>
+            <select  id="Department" name="Department" required >
+                   <option value="CSE">CSE</option>
+                   <option value="ECE">ECE</option>
+                   <option value="EEE">EEE</option>
+                   <option value="Mecanical">Mecanical</option>
+             </select>
+        </div><br>
+
+        <div>
+            <label for="Course">Course</label>
+            <select  id="Course" name="Course" required>
+                   <option value="AI">AI</option>
+                   <option value="IoT">IoT</option>
+                   <option value="Datascience">Datascience</option>
+                   <option value="ML">ML</option>
+             </select>
+        </div><br>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="Password" placeholder="7 character atleast" minlength="7" maxlength="12" required>
+          </div><br>
+        
+        <div>
+            <input type="reset">
+        </div>
+        <div>
+            <input type="submit">
+        </div>
+
+    </form>
+    
+    
+</body>
+</html>

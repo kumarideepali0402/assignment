@@ -1,0 +1,16 @@
+create database registration_db;
+use registration_db;
+create table users(
+id int auto_increment primary key,
+Student_name varchar(255),
+Mother_name varchar(255),
+Father_name varchar(255),
+Phone_number varchar(255),
+email varchar(255),
+address varchar(255),
+DOB date,
+Blood_group varchar(255),
+Department varchar(255),
+Course varchar(255),
+`password`varchar(255));
+select * from users; 
