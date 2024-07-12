@@ -1,0 +1,93 @@
+create database salesdb;
+use salesdb;
+
+create table productlines(
+productLine int primary key,
+textDescription varchar(100),
+htmlDescription varchar(100),
+image blob);
+
+create table products(
+productCode int primary key,
+productName varchar(100),
+productline int,
+productScale varchar(100),
+productVendor varchar(100),
+productDescription varchar(100),
+quantityInStock int,
+buyPrice int,
+MSRP varchar(100),
+constraint foreign key(productline) references productlines(productline)
+);
+
+create table orderdetails(
+orderNumber bigint primary key,
+productCode int,
+quantityOrdered int,
+priceEach decimal(10,2),
+orderLineNumber int,
+constraint foreign key(productCode) references products(productCode),
+constraint foreign key(orderNumber) references orders(orderNumber)
+);
+
+create table employees(
+employeeNumber int primary key,
+lastName varchar(20),
+firstName varchar(20),
+extension varchar(200),
+email varchar(200),
+officeCode int,
+reportsTo int,
+jobTitle varchar(200),
+constraint f34 foreign key(reportsTo) references employees(employeeNumber),
+constraint fk34 foreign key(officeCode) references offices(officeCode));
+
+create table offices(
+officeCode int primary key,
+city varchar(20),
+phone bigint,
+addressLine1 varchar(200),
+addressLine2 varchar(200),
+state varchar(20),
+country varchar(50),
+postalCode varchar(200),
+territory varchar(50)
+);
+
+create table customers(
+customerNumber INT primary key,
+customerName varchar(50),
+contactLastName varchar(50),
+contactFirstName varchar(50),
+phone bigint,
+addressLine1 varchar(200),
+addressLine2 varchar(200),
+city varchar(200),
+state varchar(50),
+postalCode varchar(50),
+country varchar(50),
+salesRepEmployeeNumber int ,
+creditLimit int,
+constraint foreign key(salesRepEmployeeNumber) references employees(employeeNumber)
+);
+
+
+
+create table orders(
+orderNumber bigint primary key,
+orderDate date,
+requiredDate date,
+shippedDate date,
+status varchar(20),
+comments text,
+customerNumber int ,
+constraint foreign key(customerNumber) references customers(customerNumber)
+);
+
+create table payments(
+customerNumber int ,
+checkNumber int primary key,
+paymentDate date,
+amount decimal(10,2),
+constraint foreign key(customerNumber)  references customers(customerNumber)
+);
